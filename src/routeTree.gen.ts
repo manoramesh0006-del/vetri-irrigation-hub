@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BrandsRouteImport } from './routes/brands'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CustomerServicesRouteImport } from './routes/customer-services'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ProjectsRouteImport } from './routes/projects'
@@ -23,6 +27,26 @@ const IndexRoute = IndexRouteImport.update({
 const BrandsRoute = BrandsRouteImport.update({
   id: '/brands',
   path: '/brands',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomerServicesRoute = CustomerServicesRouteImport.update({
+  id: '/customer-services',
+  path: '/customer-services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsRoute = ProductsRouteImport.update({
@@ -44,6 +68,10 @@ const ProjectsRoute = ProjectsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/brands': typeof BrandsRoute
+  '/contact': typeof ContactRoute
+  '/customer-services': typeof CustomerServicesRoute
+  '/events': typeof EventsRoute
+  '/news': typeof NewsRoute
   '/products': typeof ProductsRoute
   '/profile': typeof ProfileRoute
   '/projects': typeof ProjectsRoute
@@ -51,6 +79,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/brands': typeof BrandsRoute
+  '/contact': typeof ContactRoute
+  '/customer-services': typeof CustomerServicesRoute
+  '/events': typeof EventsRoute
+  '/news': typeof NewsRoute
   '/products': typeof ProductsRoute
   '/profile': typeof ProfileRoute
   '/projects': typeof ProjectsRoute
@@ -59,21 +91,57 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/brands': typeof BrandsRoute
+  '/contact': typeof ContactRoute
+  '/customer-services': typeof CustomerServicesRoute
+  '/events': typeof EventsRoute
+  '/news': typeof NewsRoute
   '/products': typeof ProductsRoute
   '/profile': typeof ProfileRoute
   '/projects': typeof ProjectsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/brands' | '/products' | '/profile' | '/projects'
+  fullPaths:
+    | '/'
+    | '/brands'
+    | '/contact'
+    | '/customer-services'
+    | '/events'
+    | '/news'
+    | '/products'
+    | '/profile'
+    | '/projects'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/brands' | '/products' | '/profile' | '/projects'
-  id: '__root__' | '/' | '/brands' | '/products' | '/profile' | '/projects'
+  to:
+    | '/'
+    | '/brands'
+    | '/contact'
+    | '/customer-services'
+    | '/events'
+    | '/news'
+    | '/products'
+    | '/profile'
+    | '/projects'
+  id:
+    | '__root__'
+    | '/'
+    | '/brands'
+    | '/contact'
+    | '/customer-services'
+    | '/events'
+    | '/news'
+    | '/products'
+    | '/profile'
+    | '/projects'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BrandsRoute: typeof BrandsRoute
+  ContactRoute: typeof ContactRoute
+  CustomerServicesRoute: typeof CustomerServicesRoute
+  EventsRoute: typeof EventsRoute
+  NewsRoute: typeof NewsRoute
   ProductsRoute: typeof ProductsRoute
   ProfileRoute: typeof ProfileRoute
   ProjectsRoute: typeof ProjectsRoute
@@ -93,6 +161,34 @@ declare module '@tanstack/react-router' {
       path: '/brands'
       fullPath: '/brands'
       preLoaderRoute: typeof BrandsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customer-services': {
+      id: '/customer-services'
+      path: '/customer-services'
+      fullPath: '/customer-services'
+      preLoaderRoute: typeof CustomerServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products': {
@@ -122,6 +218,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BrandsRoute: BrandsRoute,
+  ContactRoute: ContactRoute,
+  CustomerServicesRoute: CustomerServicesRoute,
+  EventsRoute: EventsRoute,
+  NewsRoute: NewsRoute,
   ProductsRoute: ProductsRoute,
   ProfileRoute: ProfileRoute,
   ProjectsRoute: ProjectsRoute,
