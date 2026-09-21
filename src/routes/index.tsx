@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Droplets,
@@ -8,12 +9,14 @@ import {
   Wrench,
   ArrowRight,
   CheckCircle2,
+  Play,
 } from "lucide-react";
 import heroImg from "@/assets/hero-irrigation.jpg";
-import fountainImg from "@/assets/landscape-fountain.jpg";
+import videoThumbnail from "@/assets/vetri-irrigation-video.jpg.asset.json";
 import turfImg from "@/assets/sports-turf.jpg";
 import productsImg from "@/assets/products.jpg";
 import { CONTACT } from "@/components/site-chrome";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,6 +48,8 @@ const services = [
 ];
 
 function Home() {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
   return (
     <>
       <section className="relative isolate">
@@ -121,14 +126,39 @@ function Home() {
               Read our company profile <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <img
-            src={fountainImg}
-            alt="Resort landscape with fountain and lawn sprinklers"
-            width={1200}
-            height={800}
-            loading="lazy"
-            className="rounded-xl object-cover shadow-[var(--shadow-soft)]"
-          />
+          <div className="relative aspect-video overflow-hidden rounded-xl bg-muted shadow-[var(--shadow-soft)]">
+            {isVideoPlaying ? (
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/VklikpSx_V0?autoplay=1&rel=0"
+                title="Vetri Irrigation project video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full"
+              />
+            ) : (
+              <>
+                <img
+                  src={videoThumbnail.url}
+                  alt="Vetri Irrigation project video thumbnail"
+                  width={480}
+                  height={360}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-foreground/20" aria-hidden />
+                <Button
+                  type="button"
+                  size="icon"
+                  onClick={() => setIsVideoPlaying(true)}
+                  aria-label="Play Vetri Irrigation video"
+                  title="Play video"
+                  className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-primary-foreground/80 shadow-lg transition-transform hover:scale-110"
+                >
+                  <Play className="ml-1 h-7 w-7 fill-current" />
+                </Button>
+              </>
+            )}
+          </div>
         </div>
       </section>
 
